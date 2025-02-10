@@ -1,0 +1,133 @@
+
+{% extends 'adminbase.html' %}
+{% load static %}
+{% block content_data %}<!--/header-->
+<section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+</section>
+<section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="{% url 'OwnerIndexView' %}">Home</a></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span><a href="{% url 'Owner_myproperty' %}">My Openings</a></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Openings Details</li>
+        </ul>
+    </div>
+</section>
+<!--/blog-post-->
+<section class="w3l-blog post-content py-5">
+    <div class="container py-lg-4 py-md-3 py-2">
+        <div class="inner mb-4">
+            <ul class="blog-single-author-date align-items-center">
+                <li>
+                    <div class="listing-category"><span>Open</span></div>
+                </li>
+                <!-- <li><span class="fa fa-eye"></span> {{data.view_count}} views</li> -->
+            </ul>
+        </div>
+        <div class="post-content">
+            <h2 class="title-single"> {{data.job_title}}</h2>
+        </div>
+        <div class="blo-singl mb-4">
+            <ul class="blog-single-author-date align-items-center">
+                <li>
+                    <p>{{data.companys_state}},{{data.companys_country}}</p>
+                </li>
+                <li><span class="fa fa-id-badge"></span> {{data.experience_level}}</li>
+                <li><span class="fa fa-suitcase"></span> {{data.work_model}}</li>
+                <li><span class="fa fa-clock-o"></span> {{data.job_type}}</li>
+            </ul>
+            <ul class="share-post">
+                <a href="#url" class="cost-estate m-o">${{data.salary}}</a>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 w3l-news">
+                <div class="blog-single-post">
+                    <div class="single-post-image mb-5">
+                        <div class="owl-blog owl-carousel owl-theme">
+                            <div class="item">
+                                <div class="card">
+                                    <img src="{{data.image.url}}" class="img-fluid radius-image" alt="image">
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="single-post-content">
+                        <h3 class="post-content-title mb-3">Description</h3>
+                        <p class="mb-4">{{ data.description }}</p>
+                        <div class="single-bg-white">
+                            <h3 class="post-content-title mb-4">Job detail</h3>
+                            <ul class="details-list">
+                            <li><strong>Job id :</strong> {{data.property_id}} </li>
+                            <li><strong>Job Type :</strong> {{data.job_type}} </li>
+                            <li><strong>No. Of Openings :</strong> {{data.no_of_openings}} </li>
+                            <li><strong>Experience Level :</strong> {{data.experience_level}} </li>
+                            <li><strong>Work Model :</strong> {{data.work_model}} </li>
+                            </ul>
+                        </div>
+                        <div class="single-bg-white">
+                            <h3 class="post-content-title mb-4">About Company</h3>
+                            <ul class="details-list">
+                                {% if data.sponsorship == True %}
+                                <li><strong>Provides Sponsership </strong></li>
+                                {% endif %} {% if data.citizenship_required == True %}
+                                <li><strong>Citizenship Required </strong> </li>
+                                {% endif %} {% if data.immediate_requirement == True %}
+                                <li><strong>Immediate Joining</strong> </li>
+                                {% endif %} {% if data.early_stage == True %}
+                                <li><strong>Early Stage </strong> </li>
+                                {% endif %} {% if data.growth_stage == True %}
+                                <li><strong>Growth Stage </strong> </li>
+                                {% endif %} {% if data.late_stage == True %}
+                                <li><strong>Late Stage</strong> </li>
+                                {% endif %} {% if data.public_company == True %}
+                                <li><strong>Public Company </strong> </li>
+                                {% endif %}
+                            </ul>
+                          </div>
+                        </div>
+                    </div>
+            
+    
+            <div class="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-lg-0 mt-5">
+                <aside class="sidebar">
+
+                    <!-- Popular Post Widget-->
+                    <div class="sidebar-widget popular-posts">
+                        {% if request.session.email == data.email_id %}
+                        <a href="{% url 'deleteproperty' id=data.id %}" class="btn btn-danger btn-style w-100">Delete Property</a>
+                        {% elif data.no_of_openings >= 1 %}
+                        <div class="sidebar-title">
+                          <h4>Contact Recruiter</h4>
+                      </div>
+                        <article class="post">
+                          <div class="text mb-0">
+                              <div class="post-info">{{data.email_id}}</div>
+                          </div>
+                      </article>
+                        {% else %}
+                          <a href="#" onclick="alert(' Position Closed ');" class="btn btn-primary btn-style w-100">Request details</a>
+                        {% endif %}
+                      </div>
+                      <div class="sidebar-widget popular-posts">
+                         <a href="{% url 'Update_Owner_Property' data.id %}"><h3>Update Job Details</h3></a> 
+                      </div>
+
+                    <!-- Popular Post Widget-->
+                    
+                    
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+<!--//blog-posts-->
+ <!-- footers 20 -->
+{% endblock content_data %}

@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+	  body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/assets/images/stats.jpg');
+            background-size: cover;
+            background-position: left;
+            background-color: transparent !important;
+			background-attachment:fixed;
+        }
+		.container-contact100{
+			            background-color: transparent !important;
+
+		}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+      </style>
+	<title>Add Listing</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'addlist/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/vendor/noui/nouislider.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'addlist/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	{% if m %}
+	<script> alert("{{m}}")</script>
+	{% endif %}
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<span class="contact100-form-title">
+					
+					{% if obj %}
+					Update Opening
+					{% else %}
+					Add Opening
+					{% endif %}
+						
+					
+				</span>
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Please Type Title">
+					<span class="label-input100">JOB TITLE With Company's Name *</span>
+					<input class="input100" type="text" name="job_title" value="{{ obj.job_title }}" placeholder="Enter Job Title Title">
+				</div>
+
+
+				<div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Company's State *</span>
+					<input class="input100" type="text" name="companys_state" value="{{ obj.companys_state }}" placeholder="Enter State">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Comapany's Country *</span>
+					<input class="input100" type="text" name="companys_country" value="{{ obj.companys_country }}" placeholder="Enter Country">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Job Industry *</span>
+					<input class="input100" type="text" name="job_industry" value="{{ obj.job_industry }}" placeholder="Eg.Software, Mechanical etc.">
+				</div>
+
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Experience Level *</span>
+					<input class="input100" type="text" name="experience_level" value="{{ obj.experience_level }}" placeholder="Eg. Intern Level, Entry Level etc.">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Work Model *</span>
+					<input class="input100" type="text" name="work_model" value="{{ obj.work_model }}" placeholder="Eg. On-site, Remote etc.">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Job type *</span>
+					<input class="input100" type="text" name="job_type" value="{{ obj.job_type }}" placeholder="Eg. Full-Time, Part-Time etc.">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Salary (In $/Month) *</span>
+					<input class="input100" type="number" name="salary" value="{{ obj.salary }}" placeholder="Enter Salary">
+				</div>
+
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					
+					{% if obj %}
+						<img src="{{ obj.image.url }}" width="200px">
+					{% endif %}
+						
+					<span class="label-input100">Image *</span>
+					<input class="input100" type="file" name="image">
+				</div>
+				<div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Video </span>
+					<input class="input100" type="file" name="video">
+				</div>
+
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Description *</span>
+					<input class="input100" type="text" name="description" value="{{ obj.description }}" placeholder="Enter Description">
+				</div>
+
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">No. of openings *</span>
+					<input class="input100" type="number" name="no_of_openings" value="{{ obj.no_of_openings }}" placeholder="Enter No.of openings">
+				</div>
+				<input class="input100" type="hidden" name="available" value="True" >
+
+                <span class="contact100-form-title">
+					About Company
+				</span>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Sponsership</span>
+					<input class="input100" type="checkbox" {% if obj.sponsorship == True %} checked {% endif %} name="sponsorship">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">CitizenShip Required</span>
+					<input class="input100" type="checkbox" {% if obj.citizenship_required == True %} checked {% endif %} name="citizenship_required">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Immediate Requirement</span>
+					<input class="input100" type="checkbox" {% if obj.immediate_requirement == True %} checked {% endif %} name="immediate_requirement">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Early Stage</span>
+					<input class="input100" type="checkbox" {% if obj.early_stage == True %} checked {% endif %} name="early_stage">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Growth Stage</span>
+					<input class="input100" type="checkbox" {% if obj.growth_stage == True %} checked {% endif %} name="growth_stage">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Late Stage</span>
+					<input class="input100" type="checkbox" {% if obj.late_stage == True %} checked {% endif %} name="late_stage">
+				</div>
+                <div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Pulic Company</span>
+					<input class="input100" type="checkbox" {% if obj.public_company == True %} checked {% endif %} name="public_company">
+				</div>
+				
+
+				
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn" type="submit">
+						<span>
+							
+							{% if obj %}
+							update
+							{% else %}
+							Submit	
+							{% endif %}
+								
+							
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'addlist/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'addlist/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'addlist/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'addlist/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'addlist/vendor/select2/select2.min.js' %}"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'addlist/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'addlist/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'addlist/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'addlist/vendor/noui/nouislider.min.js' %}"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 1500, 3900 ],
+	        connect: true,
+	        range: {
+	            'min': 1500,
+	            'max': 7500
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'addlist/js/main.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>

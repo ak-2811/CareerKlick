@@ -1,0 +1,221 @@
+ {% extends 'userbase.html' %} {% load static %} {% block content_data %}
+<!--/header-->
+
+
+<style>
+    .btn-primary {
+        transition: all 0.5s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: transparent !important;
+        outline: 1px solid #f93 !important;
+        color: #f93 !important;
+    }
+</style>
+
+
+<section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+</section>
+<section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="{% url 'UserIndexPage' %}">Home</a></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listing</li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listing Details</li>
+        </ul>
+    </div>
+</section>
+<!--/blog-post-->
+<section class="w3l-blog post-content py-5">
+    <div class="container py-lg-4 py-md-3 py-2">
+        <div class="inner mb-4">
+            <ul class="blog-single-author-date align-items-center">
+                <li>
+                    <div class="listing-category"><span>Open</span></div>
+                </li>
+                <li><span class="fa fa-eye"></span> {{data.view_count}} views</li>
+            </ul>
+        </div>
+        <div class="post-content">
+            <h2 class="title-single"> {{data.job_title}}</h2>
+        </div>
+        <div class="blo-singl mb-4">
+            <ul class="blog-single-author-date align-items-center">
+                <li>
+                    <p>{{data.companys_state}},{{data.companys_country}}</p>
+                </li>
+                <li><span class="fa fa-id-badge"></span> {{data.experience_level}}</li>
+                <li><span class="fa fa-suitcase"></span> {{data.work_model}}</li>
+                <li><span class="fa fa-clock-o"></span> {{data.job_type}}</li>
+            </ul>
+            <ul class="share-post">
+                <a href="#url" class="cost-estate m-o">${{data.salary}}</a>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 w3l-news">
+                <div class="blog-single-post">
+                    <div class="single-post-image mb-5">
+                        <div class="owl-blog owl-carousel owl-theme">
+                            <div class="item">
+                                <div class="card">
+                                    <img src="{{data.image.url}}" class="img-fluid radius-image" alt="image">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <video name='demo' controls width='100%' height='40%'>
+                                        {% if data.video %}
+                                        <source src="{{data.video.url}}" 
+                                        type="video/mp4"></source>
+                                        {% else %}
+                                        <h6>no data</h6>
+                                        {% endif %}
+                                    </video>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="single-post-content">
+                    <h3 class="post-content-title mb-3">Description</h3>
+                    <p class="mb-4">{{ data.description }}</p>
+                    <div class="single-bg-white">
+                        <h3 class="post-content-title mb-4">Job detail</h3>
+                        <ul class="details-list">
+                            <li><strong>Job id :</strong> {{data.property_id}} </li>
+                            <li><strong>Job Type :</strong> {{data.job_type}} </li>
+                            <li><strong>No. Of Openings :</strong> {{data.no_of_openings}} </li>
+                            <li><strong>Experience Level :</strong> {{data.experience_level}} </li>
+                            <li><strong>Work Model :</strong> {{data.work_model}} </li>
+                        </ul>
+                    </div>
+                    <div class="single-bg-white">
+                        <h3 class="post-content-title mb-4">About Company</h3>
+                        <ul class="details-list">
+                            {% if data.sponsorship == True %}
+                            <li><strong>Provides Sponsership </strong></li>
+                            {% endif %} {% if data.citizenship_required == True %}
+                            <li><strong>Citizenship Required </strong> </li>
+                            {% endif %} {% if data.immediate_requirement == True %}
+                            <li><strong>Immediate Joining</strong> </li>
+                            {% endif %} {% if data.early_stage == True %}
+                            <li><strong>Early Stage </strong> </li>
+                            {% endif %} {% if data.growth_stage == True %}
+                            <li><strong>Growth Stage </strong> </li>
+                            {% endif %} {% if data.late_stage == True %}
+                            <li><strong>Late Stage</strong> </li>
+                            {% endif %} {% if data.public_company == True %}
+                            <li><strong>Public Company </strong> </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-lg-0 mt-5">
+                <aside class="sidebar">
+
+                    <!-- Popular Post Widget-->
+                    <div class="sidebar-widget popular-posts">
+                        {% if request.session.email == data.email_id %}
+                        <a href="{% url 'deleteproperty' id=data.id %}" class="btn btn-danger btn-style w-100">Delete Property</a> {% elif data.no_of_openings >= 1 %}
+                        <div class="sidebar-title">
+                            <h4>Contact the Recruiter</h4>
+                        </div>
+                        <article class="post">
+                            <div class="text mb-0">
+                                <div class="post-info">{{data.email_id}}</div>
+                            </div>
+                        </article>
+                        {% else %}
+                        <a href="#" onclick="alert('User not found');" class="btn btn-primary btn-style w-100">Request details</a> {% endif %}
+                    </div>
+
+
+                    <!-- Popular Post Widget-->
+                    <a href="/propbooking/{{ data.id }}/" class="btn btn-primary btn-style w-100">Apply Now !!</a>
+
+                </aside>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-5">
+                <h2 class="py-2">Feedback</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Rating : </label>
+                        <select name="rating" class="form-control">
+                            <option value="1" {% if feed.rating == "1" %} selected {% endif %}>1</option>
+                            <option value="2" {% if feed.rating == "2" %} selected {% endif %}>2</option>
+                            <option value="3" {% if feed.rating == "3" %} selected {% endif %}>3</option>
+                            <option value="4" {% if feed.rating == "4" %} selected {% endif %}>4</option>
+                            <option value="5" {% if feed.rating == "5" %} selected {% endif %}>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Feedback : </label>
+                        <textarea name="feedback" class="form-control">{{ feed.feedback }}</textarea>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="submit">
+                </form>
+            </div>
+        </div>
+
+        <h2 class="pt-5">Feedback Data</h2>
+
+        <ul>
+            {% for fe in feed_data %}
+            <li>
+                <hr> User Name = {{ fe.cust_data.full_name }}<br> Time = {{ fe.date_time }}<br> User Rating = {{ fe.rating }}<br> User Feedback = {{ fe.feedback }}
+                <hr>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</section>
+
+
+<section class="w3l-blog post-content py-5">
+    <div class="container py-lg-3 py-md-4 py-2">
+        <div class="heading text-center mx-auto">
+            <h3 class="title-big">Also Visit</h3>
+        </div>
+
+        <div class="row pt-md-5 pt-4">
+            {% for p in data_set %}
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ p.image.url }}" style="height: 300px;" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'profile' id=p.id %}">open</a></h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Postion : {{p.job_title}}</li>
+                        <li class="list-group-item">Salary : ${{p.salary}}</li>
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    </div>
+
+</section>
+
+
+<!--//blog-posts-->
+<!-- footers 20 -->
+{% endblock content_data %}

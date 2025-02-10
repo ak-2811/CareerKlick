@@ -1,0 +1,123 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+{% block content_data %}
+
+<style>
+    #ownername {
+        color: rgb(3, 3, 3);
+        font-weight: bolder;
+        background-color: transparent;
+        border: 1px solid white;
+        padding: 15px 30px 15px 30px;
+        margin: 1px;
+        border-radius: 30px;
+    }
+
+    .atag {
+        color: rgb(3, 3, 3);
+    }
+
+    #ownername:hover {
+        color: black;
+        font-weight: bolder;
+        background-color: #f93;
+        border: 1px solid #f93;
+        padding: 15px 30px 15px 30px;
+        margin: 1px;
+        border-radius: 30px;
+    }
+
+    .atag:hover {
+        color: black;
+        font-weight: bolder;
+    }
+
+    p.contact-phone {
+        font-size: clamp(1rem, 0.975rem + 0.125vw, 1.125rem) !important;
+    }
+
+    ul.footers-17_social li a {
+        transition: all 0.5s ease-in-out;
+        display: inline-block;
+    }
+
+    ul.footers-17_social li a:hover {
+        transform: translateY(-10px);
+    }
+
+    .w3l-footers-20 .grids-content h4 {
+        font-size: clamp(1.125rem, 1.1rem + 0.125vw, 1.25rem) !important;
+    }
+
+    #username {
+        padding: 10px 20px !important;
+        transition: all 0.5s ease-in-out;
+        color: #f93 !important;
+    }
+
+    .fixed-top.nav-fixed #ownername,
+    .fixed-top.nav-fixed #username {
+        border-color: #f93;
+    }
+
+    #username:hover,
+    #ownername:hover {
+        color: black !important;
+    }
+
+    #username:hover a,
+    #ownername:hover span,
+    #ownername:hover a {
+        color: black !important;
+    }
+
+    #username a,
+    #ownername span,
+    #ownername a {
+        transition: all 0.5s ease-in-out;
+        color: #f93 !important;
+    }
+ 
+    
+</style>
+
+<script src="htpp://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#demo').DataTable();
+    });
+</script>
+</head>
+<section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+</section>
+<div class="container-fluid">
+    <table id="demo" class="table table-striped " style="width:100%">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Owner Name</th>
+                <th>Job Name</th>
+                <th>Acceptance Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in order %}
+            <tr>
+                <td>{{i.user}}</td>
+                <td>{{i.Owner}}</td>
+                <td>{{i.job_name}}</td>
+                <td>{{i.orderDate}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

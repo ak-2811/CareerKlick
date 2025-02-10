@@ -1,0 +1,90 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block content_data %}
+
+
+<style>
+    center form {
+        text-align: left;
+        max-width: 1155px !important;
+        margin: 0 auto;
+        padding: 4rem 15px 2rem !important;
+    }
+
+    .flex_grid {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        grid-gap: 50px;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+    }
+
+    .flex_grid div {
+        width: 60%;
+        box-shadow: 0 0 5px 0px #333;
+        padding: 20px;
+        font-size: clamp(1.125rem, 1.1rem + 0.125vw, 1.25rem);
+        text-transform: capitalize;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .flex input {
+        width: 35%;
+    }
+
+    [type="submit"]:not(:disabled) {
+        cursor: pointer;
+        min-width: 150px;
+        background-color: #f93 !important;
+        color: black;
+        border-radius: 30px;
+        padding: 15px 20px;
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.5s ease-in-out;
+    }
+    [type="submit"]:not(:disabled):hover {
+        color: #f93;
+        outline: 1px solid #f93;
+        background-color: transparent !important;
+    }
+</style>
+
+<section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+</section>
+
+<center>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="flex_grid">
+            <div>Recruiter's_Email : <span>{{ prod.email_id }}</span></div>
+        </div>
+        <div class="flex_grid">
+            <div>Job_Title : <span>{{ prod.job_title }}</span></div>
+        </div>
+        <div class="flex_grid">
+            <div class="flex">Resume:
+                <input type="file" name="document" id="document" placeholder="Resume"><br>
+            </div>
+        </div>
+
+
+        <input type="submit" value="Submit Application">
+    </form>
+    <b>
+        <p style="color: rgb(47, 0, 255)">{{ error }}</p>
+    </b> <br>
+</center>
+<!-- footers 20 -->
+{% endblock content_data %}

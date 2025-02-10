@@ -1,0 +1,75 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block content_data %}
+
+<style>
+    .card-body div{
+        padding: 15px;
+        margin-bottom: 10px;
+        box-shadow: 0 0 8px 0px #333;
+        font-size: 18px;
+        text-transform: capitalize;
+    }
+    
+    .card-body .img img {
+        margin-left: 8rem;
+        width: 300px;
+    height: 330px;
+    }
+
+</style>
+
+<section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+</section>
+<section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="{% url 'UserIndexPage' %}">Home</a></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Application</li>
+        </ul>
+    </div>
+</section>
+
+<section class="w3l-breadcrumb">
+  
+  <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div>Recruiter's Name : {{ prod.owner_id.Ownername }}</div>
+                <div>Recruiter's No : {{ prod.owner_id.Ownerphone }}</div>
+                <div>Recruiter's Email : {{ prod.owner_id.Owneremail }}</div>
+                <div class="img">Company's Image : <br>
+                <img src="{{ prod.prop_id.image.url }}" width="200px"></div>
+                <!-- <div>Room Count : 1 </div> -->
+                <div>Selection Date : {{ prod.date }}</div>
+            </div>
+          </div>
+</div>
+{% if prod.pyment %}
+ 
+{% else %}
+<form method='POST' action="{% url 'paymenthandler' %}" >
+    {% csrf_token %}
+    <input type="hidden" value="{{ prod.user_id.full_name }}" name='user'>
+    <input type="hidden" value="{{ prod.user_id.id }}" name='userid'>
+    <input type="hidden" value="{{ prod.owner_id.id }}" name='ownerid'>
+    <input type="hidden" value="{{ prod.owner_id.Ownername }}" name='owner'>
+    <input type="hidden" value="{{ prod.prop_id.salary }}" name='price'>
+    <input type="hidden" value="{{ prod.prop_id.job_title }}" name='prop_name'>
+    <input type="hidden" value="{{ prod.id }}" name='id'>
+  <button 
+    type="submit"
+    class="btn btn-success btn-lg" style="background-color: #7AB730 ; border: 0;margin-left: 50%;"
+    name="submit"
+    value="buy">
+    Accept
+  </button>
+</form>
+{% endif %} 
+</section>
+
+{% endblock content_data %}
